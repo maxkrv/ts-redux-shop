@@ -8,7 +8,7 @@ import {
 	Grid,
 	Typography,
 } from "@mui/material";
-import { useAppDispatch, useAppSelector } from "../hooks/redux";
+import { useAppDispatch } from "../hooks/redux";
 import { IProduct } from "../types/types";
 import { addToCart } from "../store/reducers/productSlice";
 
@@ -17,7 +17,6 @@ interface ProductItemProps {
 }
 
 const ProductItem: FC<ProductItemProps> = ({ product }) => {
-	const cart = useAppSelector((state) => state.product.cart.list);
 	const dispatch = useAppDispatch();
 
 	return (
@@ -75,13 +74,6 @@ const ProductItem: FC<ProductItemProps> = ({ product }) => {
 					Price {product.price}$
 				</Typography>
 				<CardActions sx={{ alignSelf: "flex-start" }}>
-					{/*{*/}
-					{/*	cart.list.isItemInCart ? (*/}
-					{/*		<div>in cart</div>*/}
-					{/*	) : (*/}
-					{/*		*/}
-					{/*	)*/}
-					{/*}*/}
 					<Button
 						variant={"contained"}
 						size="small"
