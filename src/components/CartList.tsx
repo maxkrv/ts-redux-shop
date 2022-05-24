@@ -1,13 +1,17 @@
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 import { Button, Container, Divider, List, Typography } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "../hooks/redux";
 import CartItem from "./CartItem";
-import { clearCart } from "../store/reducers/productSlice";
+import { calculateTotals, clearCart } from "../store/reducers/productSlice";
 
 const CartList: FC = () => {
 	const cart = useAppSelector((state) => state.product.cart);
 	const total = useAppSelector((state) => state.product.cart.total);
 	const dispatch = useAppDispatch();
+
+	useEffect(() => {
+		dispatch(calculateTotals());
+	}, [cart, dispatch]);
 
 	return (
 		<div style={{ height: "100%" }}>
@@ -38,7 +42,7 @@ const CartList: FC = () => {
 						variant="h6"
 						component="p"
 					>
-						Total price: {total} $
+						Total price: {total.toFixed(2)} $
 					</Typography>
 					<Button
 						variant="contained"

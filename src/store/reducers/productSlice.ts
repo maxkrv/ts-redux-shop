@@ -69,6 +69,26 @@ const productSlice = createSlice({
 				cartItem.quantity += 1;
 			}
 		},
+		decrease: (state, action: PayloadAction<number>) => {
+			const cartItem = state.cart.list.find(
+				(item) => item.id === action.payload
+			);
+
+			if (cartItem) {
+				cartItem.quantity -= 1;
+			}
+		},
+		calculateTotals: (state) => {
+			let amount = 0;
+			let total = 0;
+			state.cart.list.forEach((item) => {
+				amount += item.quantity;
+				total += item.quantity * item.price;
+			});
+			// @ts-ignore
+			state.cart.amount = amount;
+			state.cart.total = total;
+		},
 	},
 	extraReducers: (builder) => {
 		builder
@@ -82,6 +102,12 @@ const productSlice = createSlice({
 	},
 });
 
-export const { addToCart, removeFromCart, clearCart, increase } =
-	productSlice.actions;
+export const {
+	addToCart,
+	removeFromCart,
+	clearCart,
+	increase,
+	decrease,
+	calculateTotals,
+} = productSlice.actions;
 export default productSlice.reducer;

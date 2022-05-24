@@ -4,7 +4,11 @@ import AddCircleSharpIcon from "@mui/icons-material/AddCircleSharp";
 import RemoveCircleSharpIcon from "@mui/icons-material/RemoveCircleSharp";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { ICart } from "../types/types";
-import { increase, removeFromCart } from "../store/reducers/productSlice";
+import {
+	decrease,
+	increase,
+	removeFromCart,
+} from "../store/reducers/productSlice";
 import { useAppDispatch } from "../hooks/redux";
 
 interface CartItemProps extends ICart {}
@@ -48,7 +52,13 @@ const CartItem: FC<CartItemProps> = ({ id, title, image, price, quantity }) => {
 							<AddCircleSharpIcon />
 						</IconButton>
 						<ListItemText primary={quantity} />
-						<IconButton>
+						<IconButton
+							onClick={() => {
+								if (quantity > 1) {
+									dispatch(decrease(id));
+								}
+							}}
+						>
 							<RemoveCircleSharpIcon />
 						</IconButton>
 					</div>

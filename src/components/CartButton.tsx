@@ -14,7 +14,11 @@ const CartButton: FC = () => {
 	return (
 		<>
 			<IconButton onClick={handleOpen}>
-				<Badge showZero={true} badgeContent={0} color="secondary">
+				<Badge
+					showZero={true}
+					badgeContent={cart.amount}
+					color="secondary"
+				>
 					<ShoppingCartRoundedIcon sx={{ fill: "#fff" }} />
 				</Badge>
 			</IconButton>
