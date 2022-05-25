@@ -85,9 +85,17 @@ const productSlice = createSlice({
 				amount += item.quantity;
 				total += item.quantity * item.price;
 			});
-			// @ts-ignore
 			state.cart.amount = amount;
 			state.cart.total = total;
+		},
+		sortByName: (state) => {
+			state.list.sort((a, b) => a.title.localeCompare(b.title));
+		},
+		sortLowToHigh: (state) => {
+			state.list.sort((a, b) => a.price - b.price);
+		},
+		sortHighToLow: (state) => {
+			state.list.sort((a, b) => b.price - a.price);
 		},
 	},
 	extraReducers: (builder) => {
@@ -109,5 +117,8 @@ export const {
 	increase,
 	decrease,
 	calculateTotals,
+	sortByName,
+	sortLowToHigh,
+	sortHighToLow,
 } = productSlice.actions;
 export default productSlice.reducer;

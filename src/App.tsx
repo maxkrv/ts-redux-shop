@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import Header from "./components/UI/Header";
 import ProductList from "./components/ProductList";
-import Footer from "./components/UI/footer";
+import Footer from "./components/UI/Footer";
 import { useAppDispatch, useAppSelector } from "./hooks/redux";
 import { calculateTotals } from "./store/reducers/productSlice";
 
