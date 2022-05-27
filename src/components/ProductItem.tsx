@@ -1,16 +1,18 @@
 import React, { FC } from "react";
 import {
+	Alert,
 	Button,
 	Card,
 	CardActions,
 	CardContent,
 	CardMedia,
 	Grid,
+	Snackbar,
 	Typography,
 } from "@mui/material";
-import { useAppDispatch } from "../hooks/redux";
+import { useAppDispatch, useAppSelector } from "../hooks/redux";
 import { IProduct } from "../types/types";
-import { addToCart } from "../store/reducers/productSlice";
+import { addToCart, closeAlert } from "../store/reducers/productSlice";
 
 interface ProductItemProps {
 	product: IProduct;
@@ -18,6 +20,7 @@ interface ProductItemProps {
 
 const ProductItem: FC<ProductItemProps> = ({ product }) => {
 	const dispatch = useAppDispatch();
+	const { alert } = useAppSelector((state) => state.product);
 
 	return (
 		<Grid item xs={12} sm={6} md={4}>
@@ -83,6 +86,19 @@ const ProductItem: FC<ProductItemProps> = ({ product }) => {
 					</Button>
 				</CardActions>
 			</Card>
+			<Snackbar
+				open={alert}
+				autoHideDuration={6000}
+				onClose={() => dispatch(closeAlert())}
+			>
+				<Alert
+					onClose={() => dispatch(closeAlert())}
+					severity="success"
+					sx={{ width: "100%" }}
+				>
+					Added to cart.
+				</Alert>
+			</Snackbar>
 		</Grid>
 	);
 };

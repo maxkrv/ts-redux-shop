@@ -10,6 +10,7 @@ interface productState {
 		total: number;
 	};
 	isLoading: boolean;
+	alert: boolean;
 }
 
 const initialState: productState = {
@@ -20,6 +21,7 @@ const initialState: productState = {
 		total: 0,
 	},
 	isLoading: false,
+	alert: false,
 };
 
 export const fetchProduct = createAsyncThunk<
@@ -51,6 +53,7 @@ const productSlice = createSlice({
 			} else {
 				state.cart.list.push(productToAdd);
 			}
+			state.alert = true;
 		},
 		removeFromCart: (state, action: PayloadAction<number>) => {
 			state.cart.list = state.cart.list.filter(
@@ -97,6 +100,9 @@ const productSlice = createSlice({
 		sortHighToLow: (state) => {
 			state.list.sort((a, b) => b.price - a.price);
 		},
+		closeAlert: (state) => {
+			state.alert = false;
+		},
 	},
 	extraReducers: (builder) => {
 		builder
@@ -120,5 +126,6 @@ export const {
 	sortByName,
 	sortLowToHigh,
 	sortHighToLow,
+	closeAlert,
 } = productSlice.actions;
 export default productSlice.reducer;
