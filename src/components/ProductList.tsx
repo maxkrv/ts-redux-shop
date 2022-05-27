@@ -23,9 +23,9 @@ const ProductList: FC = () => {
 
 	return (
 		<main style={{ flex: "1 1 auto" }}>
-			<Container sx={{ marginTop: "100px" }}>
+			<Container sx={{ marginTop: "70px" }}>
 				<ProductSelect />
-				<Grid container spacing={2}>
+				<Grid container spacing={2} sx={{ marginTop: "20px" }}>
 					{list.map((product) => {
 						return (
 							<ProductItem key={product.id} product={product} />
