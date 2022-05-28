@@ -10,10 +10,11 @@ const CartButton: FC = () => {
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
 	const cart = useAppSelector((state) => state.product.cart);
+	const { isLoading } = useAppSelector((state) => state.product);
 
 	return (
 		<>
-			<IconButton onClick={handleOpen}>
+			<IconButton onClick={handleOpen} disabled={!!isLoading}>
 				<Badge
 					showZero={true}
 					badgeContent={cart.amount}
